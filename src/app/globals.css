@@ -7,9 +7,16 @@
   --foreground: #262522;
   --secondary-foreground: #262522;
   --tertiary-foreground: #4B4847;
+
+  --tile-size: 100px;
+  --light-tile: #EBECD0;
+  --dark-tile: #739552;
+  --highlight: rgba(0, 0, 0, .2);
+  --check: #FEEC48;
 }
 
 body {
   color: #fff;
+  height: 100vh;
   background: var(--background);
 }
