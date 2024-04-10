@@ -45,7 +45,7 @@ const config: Config = {
         '25-cols-800': 'repeat(8, var(--tile-size))'
       },
       gridTemplateRows: {
-        '25-rows-800': 'repeat(8, 100px)',
+        '25-rows-800': 'repeat(8, var(--tile-size))',
       },
     },
   },

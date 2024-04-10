@@ -33,7 +33,7 @@ const PromotionBox = ({ onClosePopup }: PromotionBoxProps) => {
     }
 
     return (
-        <div className="absolute flex top-0 left-[25%] border-8 border-light-tile w-1/2 min-h-[110px] bg-light-tile shadow-custom">
+        <div className="absolute flex items-center top-0 left-[25%] border-8 border-light-tile w-1/2 min-h-[110px] bg-light-tile shadow-custom">
             {options.map(option => (
                 <div
                     key={option}
@@ -44,8 +44,8 @@ const PromotionBox = ({ onClosePopup }: PromotionBoxProps) => {
                         onClick={() => onClick(option)}
                         src={`/pieces/${color}${option}.png`}
                         alt={color + option}
-                        width={100}
-                        height={100}
+                        width={85}
+                        height={85}
                     />
                 </div>
             )
