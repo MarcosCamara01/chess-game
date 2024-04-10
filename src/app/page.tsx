@@ -6,7 +6,7 @@ import { useReducer } from 'react'
 import { initGameState } from '../constants';
 import AppContext from '../Context'
 import Control from '@/components/Control/Control';
-import TakeBack from '@/components/Control/bits/TakeBack';
+import ActionButtons from '@/components/Control/bits/ActionButtons';
 import MovesList from '@/components/Control/bits/MovesList';
 
 export default function Home() {
@@ -23,7 +23,7 @@ export default function Home() {
         <Board />
         <Control>
           <MovesList />
-          <TakeBack />
+          <ActionButtons />
         </Control>
       </main>
     </AppContext.Provider>

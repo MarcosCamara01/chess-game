@@ -1,6 +1,13 @@
 const Ranks = ({ ranks }: { ranks: number[] }) => (
-    <div className="text-dark-tile flex flex-col items-center justify-around">
-        {ranks.map(rank => <span key={rank}>{rank}</span>)}
+    <div className="flex flex-col items-center justify-around">
+        {ranks.map(rank => (
+            <span
+                key={rank}
+                className="text-dark-tile font-semibold"
+            >
+                {rank}
+            </span>
+        ))}
     </div>
 )
 

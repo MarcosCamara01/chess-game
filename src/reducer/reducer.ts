@@ -94,11 +94,38 @@ export const reducer = (state: GameState, action: Action) => {
         }
 
         case ActionTypes.TAKE_BACK: {
-            let { position, movesList, turn } = state;
-            if (position.length > 1) {
-                position = position.slice(0, position.length - 1);
-                movesList = movesList.slice(0, movesList.length - 1);
+            let { position, movesList, turn, allPositionList, allMovesList } = state;
+            const currentPositionIndex = position.length - 1;
+            const idexAfterThisMove = position.length - 2;
+
+            if (currentPositionIndex > 0) {
+                allPositionList = allPositionList.concat(position);
+                allMovesList = allMovesList.concat(movesList);
+                position = position.slice(0, currentPositionIndex);
+                movesList = movesList.slice(0, idexAfterThisMove);
                 turn = turn === 'w' ? 'b' : 'w';
+            }
+            console.log(allMovesList)
+            return {
+                ...state,
+                position,
+                movesList,
+                turn,
+                allMovesList,
+                allPositionList
+            };
+        }
+
+        case ActionTypes.MOVE_FORWARD: {
+            let { position, movesList, turn, allPositionList, allMovesList } = state;
+
+            const currentPositionIndex = position.length + 1;
+            const idexAfterThisMove = position.length;
+
+            if (allPositionList.length > 0) {
+                position = allPositionList.slice(0, currentPositionIndex);
+                movesList = allMovesList.slice(0, idexAfterThisMove);
+                turn = turn === 'w' ? 'w' : 'b';
             }
 
             return {
@@ -107,7 +134,7 @@ export const reducer = (state: GameState, action: Action) => {
                 movesList,
                 turn,
             };
-        }
+        }    
 
         default:
             return state;

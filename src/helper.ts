@@ -1,4 +1,5 @@
 export const getCharacter = (file: any) => String.fromCharCode(file + 96)
+
 export const createPosition = () => {
 
     const position = new Array(8).fill('').map(x => new Array(8).fill(''))
@@ -25,8 +26,6 @@ export const createPosition = () => {
     position[7][5] = 'bb'
     position[7][6] = 'bn'
     position[7][7] = 'br'
-
-
 
     return position
 }

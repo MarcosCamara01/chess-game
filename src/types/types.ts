@@ -5,6 +5,8 @@ export interface GameState {
     turn: string;
     candidateMoves: [number, number][];
     movesList: Moves;
+    allMovesList: Moves;
+    allPositionList: string[][];
     promotionSquare: { [key: string]: any } | null;
     status: string;
     castleDirection: {

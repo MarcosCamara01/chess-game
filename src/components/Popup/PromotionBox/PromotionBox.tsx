@@ -33,7 +33,7 @@ const PromotionBox = ({ onClosePopup }: PromotionBoxProps) => {
     }
 
     return (
-        <div className="absolute flex items-center top-0 left-[25%] border-8 border-light-tile w-1/2 min-h-[110px] bg-light-tile shadow-custom">
+        <div className="absolute flex items-center top-[calc(50%-25px)] left-[25%] border-8 border-light-tile w-1/2 min-h-[110px] bg-light-tile shadow-custom">
             {options.map(option => (
                 <div
                     key={option}

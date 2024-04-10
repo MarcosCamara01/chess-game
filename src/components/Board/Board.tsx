@@ -15,8 +15,8 @@ const Board = () => {
     const ranks = Array(8).fill('').map((_, i) => 8 - i);
     const files = Array(8).fill('').map((_, i) => i + 1);
 
-
     const { appState, dispatch } = useAppContext();
+
     const position = appState.position[appState.position.length - 1]
 
     const checkTile = (() => {
@@ -63,7 +63,7 @@ const Board = () => {
     }
 
     return (
-        <section className='grid grid-cols-25-cols-auto relative'>
+        <section className='grid grid-cols-25-cols-auto relative transition-all' id='board-container'>
 
             <Ranks ranks={ranks} />
 

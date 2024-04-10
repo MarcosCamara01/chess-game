@@ -26,3 +26,9 @@ export const takeBack = () => {
         type: actionTypes.TAKE_BACK,
     }
 }
+
+export const moveForward = () => {
+    return {
+        type: actionTypes.MOVE_FORWARD,
+    }
+}

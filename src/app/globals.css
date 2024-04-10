@@ -22,3 +22,7 @@ body {
   align-items: center;
   background: var(--background);
 }
+
+.board-container.rotate {
+  transform: rotate(180deg); /* Cambia el ángulo según lo necesites */
+}

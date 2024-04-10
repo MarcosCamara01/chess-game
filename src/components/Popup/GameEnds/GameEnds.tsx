@@ -8,13 +8,10 @@ import wK from "../../../../public/pieces/wK.png"
 const GameEnds = () => {
     const { appState: { status }, dispatch } = useAppContext();
 
-    if (status === Status.ongoing || status === Status.promoting)
+    if (status === Status.ongoing || status === Status.promoting) {
         return null
-
-    const newGame = () => {
-        dispatch(setupNewGame())
     }
-
+        
     const firstLetter = status.charAt(0);
 
     const isWin = status.endsWith('wins')
@@ -22,7 +19,7 @@ const GameEnds = () => {
     return (
         <div className="absolute left-[25%] top-[35%] border-8 border-light-tile w-1/2 min-h-[30%] bg-light-tile shadow-custom text-center p-3 flex flex-col justify-between items-center">
             <h1 className='text-black text-3xl font-semibold'>{isWin ? status : 'Draw'}</h1>
-            {!isWin && <p>{status}</p>}
+            {!isWin && <p className='text-black'>{status}</p>}
             {
                 status !== "draws" ?
                     <Image
@@ -48,7 +45,7 @@ const GameEnds = () => {
                     </div>
             }
             <button
-                onClick={newGame}
+                onClick={() => dispatch(setupNewGame())}
                 className='text-black text-base font-semibold'
             >
                 New Game
