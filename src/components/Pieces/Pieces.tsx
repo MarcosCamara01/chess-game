@@ -1,4 +1,3 @@
-import './Pieces.css'
 import Piece from './Piece'
 import { useRef } from 'react'
 import { useAppContext } from '@/Context'
@@ -108,7 +107,7 @@ const Pieces = () => {
     const onDragOver = (e: React.DragEvent<HTMLDivElement>) => { e.preventDefault() }
 
     return <div
-        className='pieces'
+        className='absolute top-0 right-0 left-quarter bottom-quarter'
         ref={ref}
         onDrop={onDrop}
         onDragOver={onDragOver} >

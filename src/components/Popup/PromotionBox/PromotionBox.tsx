@@ -1,11 +1,10 @@
 import { useAppContext } from '@/Context'
 import { copyPosition, getNewMoveNotation, } from '@/helper';
 import { makeNewMove, clearCandidates } from '@/reducer/actions/move';
-import './PromotionBox.css'
 import { PromotionBoxProps } from '@/types/types';
+import Image from 'next/image';
 
 const PromotionBox = ({ onClosePopup }: PromotionBoxProps) => {
-
     const { appState, dispatch } = useAppContext();
     const { promotionSquare } = appState;
 
@@ -31,16 +30,25 @@ const PromotionBox = ({ onClosePopup }: PromotionBoxProps) => {
         dispatch(clearCandidates())
 
         dispatch(makeNewMove({ newPosition, newMove }))
-
     }
 
     return (
-        <div className="popup--inner promotion-choices">
-            {options.map(option =>
-                <div key={option}
-                    onClick={() => onClick(option)}
-                    className={`piece ${color}${option}`}
-                />
+        <div className="absolute flex top-0 left-[25%] border-8 border-light-tile w-1/2 min-h-[110px] bg-light-tile shadow-custom">
+            {options.map(option => (
+                <div
+                    key={option}
+                    className='w-[25%] h-full border border-dark-tile transition-all hover:shadow-promotion'
+                >
+                    <Image
+                        className='h-full w-full cursor-pointer transition-all hover:scale-105'
+                        onClick={() => onClick(option)}
+                        src={`/pieces/${color}${option}.png`}
+                        alt={color + option}
+                        width={100}
+                        height={100}
+                    />
+                </div>
+            )
             )}
         </div>
     )

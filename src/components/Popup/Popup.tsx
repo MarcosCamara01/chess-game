@@ -1,7 +1,6 @@
 import React from 'react';
 import { Status } from '@/constants';
 import { useAppContext } from '@/Context';
-import './Popup.css';
 
 const Popup = ({ children }: { children: React.ReactNode }) => {
     const { appState: { status } } = useAppContext();
@@ -10,7 +9,7 @@ const Popup = ({ children }: { children: React.ReactNode }) => {
         return null;
 
     return (
-        <div className="popup">
+        <div className="absolute inset-0 flex content-center bg-highlight">
             {React.Children.toArray(children)}
         </div>
     );

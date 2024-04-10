@@ -11,12 +11,14 @@
   --tile-size: 100px;
   --light-tile: #EBECD0;
   --dark-tile: #739552;
-  --highlight: rgba(0, 0, 0, .2);
-  --check: #FEEC48;
+  --highlight: rgba(0, 0, 0, .3);
+  --check: #F5F682;
 }
 
 body {
   color: #fff;
   height: 100vh;
+  display: flex;
+  align-items: center;
   background: var(--background);
 }

@@ -19,7 +19,7 @@ export default function Home() {
 
   return (
     <AppContext.Provider value={providerState} >
-      <main className='flex items-center justify-center'>
+      <main className='w-full flex justify-center gap-5 p-5'>
         <Board />
         <Control>
           <MovesList />

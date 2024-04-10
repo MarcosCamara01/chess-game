@@ -3,12 +3,16 @@ import arbiter from '@/arbiter/arbiter';
 import { useAppContext } from '@/Context';
 import { generateCandidates } from '@/reducer/actions/move';
 import { PieceInfo } from '@/types/types';
+import Image from 'next/image';
 
 const Piece = ({ rank, file, piece }: PieceInfo) => {
     const { appState, dispatch } = useAppContext();
     const { turn, castleDirection, position: currentPosition } = appState;
 
-    const onDragStart = (e: React.DragEvent<HTMLDivElement>) => {
+    const translationX = file * 100; 
+    const translationY = (7 - rank) * 100; 
+
+    const onDragStart = (e: React.DragEvent<HTMLImageElement>) => {
         const target = e.currentTarget;
         if (target) {
             e.dataTransfer.effectAllowed = "move";
@@ -32,7 +36,7 @@ const Piece = ({ rank, file, piece }: PieceInfo) => {
         }
     };
 
-    const onDragEnd = (e: React.DragEvent<HTMLDivElement>) => {
+    const onDragEnd = (e: React.DragEvent<HTMLImageElement>) => {
         const target = e.currentTarget;
         if (target) {
             target.style.display = 'block';
@@ -40,11 +44,16 @@ const Piece = ({ rank, file, piece }: PieceInfo) => {
     };
 
     return (
-        <div
-            className={`piece ${piece} p-${file}${rank}`}
+        <Image
+            className="w-[12.5%] h-[12.5%] absolute cursor-grab"
+            src={`/pieces/${piece}.png`}
             draggable={true}
             onDragStart={onDragStart}
             onDragEnd={onDragEnd}
+            alt={piece}
+            width={100}
+            height={100}
+            style={{ transform: `translate(${translationX}%, ${translationY}%)` }}
         />
     );
 };
