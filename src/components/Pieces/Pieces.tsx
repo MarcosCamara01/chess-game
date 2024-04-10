@@ -107,7 +107,7 @@ const Pieces = () => {
     const onDragOver = (e: React.DragEvent<HTMLDivElement>) => { e.preventDefault() }
 
     return <div
-        className='absolute top-0 right-0 left-quarter bottom-quarter'
+        className='absolute top-0 right-0 bottom-quarter w-board h-board'
         ref={ref}
         onDrop={onDrop}
         onDragOver={onDragOver} >
