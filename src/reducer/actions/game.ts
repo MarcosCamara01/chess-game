@@ -1,5 +1,13 @@
+import { GameState } from '@/types/types';
 import actionTypes from '../actionTypes';
 import { initGameState } from '@/constants';
+
+export const initStored = (gameStored: GameState) => {
+    return {
+        type: actionTypes.INIT_STORED,
+        payload: gameStored,
+    }
+}
 
 export const updateCastling = (direction: string) => {
     return {

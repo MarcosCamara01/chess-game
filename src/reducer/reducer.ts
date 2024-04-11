@@ -1,9 +1,18 @@
+"use client"
+
 import { Status } from "@/constants";
 import ActionTypes from "./actionTypes";
 import { Action, GameState } from "@/types/types";
 
 export const reducer = (state: GameState, action: Action) => {
     switch (action.type) {
+
+        case ActionTypes.INIT_STORED: {
+            return {
+                ...action.payload,
+            };
+        }
+
         case ActionTypes.NEW_MOVE: {
             let { position, movesList, turn } = state;
             position = [
@@ -134,7 +143,7 @@ export const reducer = (state: GameState, action: Action) => {
                 movesList,
                 turn,
             };
-        }    
+        }
 
         default:
             return state;

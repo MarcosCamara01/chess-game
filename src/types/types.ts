@@ -1,12 +1,12 @@
 export type ChessBoard = string[][];
 
 export interface GameState {
-    position: string[][];
+    position: ChessBoard;
     turn: string;
     candidateMoves: [number, number][];
     movesList: Moves;
     allMovesList: Moves;
-    allPositionList: string[][];
+    allPositionList: ChessBoard;
     promotionSquare: { [key: string]: any } | null;
     status: string;
     castleDirection: {
