@@ -12,10 +12,18 @@ const ActionButtons = () => {
 
     const rotateBoard = () => {
         const boardContainer = document.getElementById('board-container');
-        if (boardContainer) {
+        const pieces = document.querySelectorAll('#piece');
+        const columnItems = document.querySelectorAll('#column-items');
+        if (boardContainer && pieces && columnItems) {
             boardContainer.classList.toggle('rotate-180');
+            pieces.forEach(piece => {
+                piece.classList.toggle('rotate-180');
+            });
+            columnItems.forEach(item => {
+                item.classList.toggle('rotate-180');
+            });
         }
-    }
+    }    
 
     return (
         <div className='flex gap-3 justify-between bg-[#21201D]'>

@@ -9,8 +9,8 @@ const Piece = ({ rank, file, piece }: PieceInfo) => {
     const { appState, dispatch } = useAppContext();
     const { turn, castleDirection, position: currentPosition } = appState;
 
-    const translationX = file * 100; 
-    const translationY = (7 - rank) * 100; 
+    const translationX = file * 100;
+    const translationY = (7 - rank) * 100;
 
     const onDragStart = (e: React.DragEvent<HTMLImageElement>) => {
         const target = e.currentTarget;
@@ -44,17 +44,22 @@ const Piece = ({ rank, file, piece }: PieceInfo) => {
     };
 
     return (
-        <Image
-            className="w-[12.5%] h-[12.5%] absolute cursor-grab"
-            src={`/pieces/${piece}.png`}
-            draggable={true}
-            onDragStart={onDragStart}
-            onDragEnd={onDragEnd}
-            alt={piece}
-            width={85}
-            height={85}
+        <div
+            className='w-[12.5%] h-[12.5%] absolute cursor-grab'
             style={{ transform: `translate(${translationX}%, ${translationY}%)` }}
-        />
+        >
+            <Image
+                className="w-full h-full relative transition-all"
+                src={`/pieces/${piece}.png`}
+                draggable={true}
+                onDragStart={onDragStart}
+                onDragEnd={onDragEnd}
+                alt={piece}
+                width={85}
+                height={85}
+                id='piece'
+            />
+        </div>
     );
 };
 

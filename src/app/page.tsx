@@ -1,10 +1,10 @@
 "use client"
 
-import Board from '@/components/Board/Board';
-import { reducer } from '@/reducer/reducer'
-import { useReducer } from 'react'
+import { useReducer } from 'react';
+import { reducer } from '@/reducer/reducer';
 import { initGameState } from '../constants';
-import AppContext from '../Context'
+import AppContext from '../Context';
+import Board from '@/components/Board/Board';
 import Control from '@/components/Control/Control';
 import ActionButtons from '@/components/Control/bits/ActionButtons';
 import MovesList from '@/components/Control/bits/MovesList';
