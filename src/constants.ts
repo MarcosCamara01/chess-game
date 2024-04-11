@@ -18,6 +18,8 @@ export const initGameState = {
     allMovesList: [],
     promotionSquare: null,
     status: Status.ongoing,
+    whiteTimer: 600,
+    blackTimer: 600,
     castleDirection: {
         w: 'both',
         b: 'both'

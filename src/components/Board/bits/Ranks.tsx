@@ -3,7 +3,7 @@ const Ranks = ({ ranks }: { ranks: number[] }) => (
         {ranks.map(rank => (
             <span
                 key={rank}
-                className="text-dark-tile font-semibold transition-all"
+                className="text-dark-tile font-semibold"
                 id="column-items"
             >
                 {rank}

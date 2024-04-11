@@ -33,6 +33,40 @@ export const reducer = (state: GameState, action: Action) => {
             };
         }
 
+        case ActionTypes.UPDATE_WHITE_TIMER: {
+            const whiteTimer = action.payload;
+
+            if (whiteTimer <= 0) {
+                return {
+                    ...state,
+                    whiteTimer: 0,
+                    status: Status.insufficient,
+                };
+            }
+
+            return {
+                ...state,
+                whiteTimer,
+            };
+        }
+
+        case ActionTypes.UPDATE_BLACK_TIMER: {
+            const blackTimer = action.payload;
+
+            if (blackTimer <= 0) {
+                return {
+                    ...state,
+                    blackTimer: 0,
+                    status: Status.insufficient,
+                };
+            }
+
+            return {
+                ...state,
+                blackTimer,
+            };
+        }
+
         case ActionTypes.GENERATE_CANDIDATE_MOVES: {
             const { candidateMoves } = action.payload;
             return {
@@ -114,7 +148,7 @@ export const reducer = (state: GameState, action: Action) => {
                 movesList = movesList.slice(0, idexAfterThisMove);
                 turn = turn === 'w' ? 'b' : 'w';
             }
-            console.log(allMovesList)
+
             return {
                 ...state,
                 position,

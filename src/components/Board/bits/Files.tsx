@@ -5,7 +5,7 @@ const Files = ({ files }: { files: number[] }) => (
         {files.map((file) => (
             <span
                 key={file}
-                className='text-dark-tile font-semibold transition-all'
+                className='text-dark-tile font-semibold'
                 id='column-items'
             >
                 {getCharacter(file)}

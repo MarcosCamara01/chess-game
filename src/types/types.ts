@@ -8,6 +8,8 @@ export interface GameState {
     allMovesList: Moves;
     allPositionList: ChessBoard;
     promotionSquare: { [key: string]: any } | null;
+    whiteTimer: number,
+    blackTimer: number,
     status: string;
     castleDirection: {
         [key: string]: string;

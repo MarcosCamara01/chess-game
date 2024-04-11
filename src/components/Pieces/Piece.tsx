@@ -49,7 +49,7 @@ const Piece = ({ rank, file, piece }: PieceInfo) => {
             style={{ transform: `translate(${translationX}%, ${translationY}%)` }}
         >
             <Image
-                className="w-full h-full relative transition-all"
+                className="w-full h-full relative"
                 src={`/pieces/${piece}.png`}
                 draggable={true}
                 onDragStart={onDragStart}

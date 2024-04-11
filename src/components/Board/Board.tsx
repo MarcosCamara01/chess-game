@@ -63,7 +63,7 @@ const Board = () => {
     }
 
     return (
-        <section className='grid grid-cols-25-cols-auto relative transition-all' id='board-container'>
+        <section className='grid grid-cols-25-cols-auto relative' id='board-container'>
 
             <Ranks ranks={ranks} />
 
