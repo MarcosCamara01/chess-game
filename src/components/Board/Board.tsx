@@ -37,9 +37,9 @@ const Board = () => {
         c += (i + j) % 2 === 0 ? ' bg-light-tile ' : ' bg-dark-tile '
         if (appState.candidateMoves?.find((m: number[]) => m[0] === i && m[1] === j)) {
             if (position[i][j])
-                c += ' after:border-[10px] after:block after:absolute after:w-tile after:h-tile after:border-highlight after:rounded-full after:inset-0'
+                c += ' after:border-[10px] after:block after:absolute after:w-tile after:h-tile after:border-highlight after:rounded-full after:inset-0 cursor-pointer'
             else
-                c += ' after:block after:absolute after:content-[""] after:w-half-tile after:h-half-tile after:bg-highlight after:rounded-full after:inset-1/4'
+                c += ' after:block after:absolute after:content-[""] after:w-half-tile after:h-half-tile after:bg-highlight after:rounded-full after:inset-1/4 cursor-pointer'
         }
 
         if (checkTile && checkTile[0] === i && checkTile[1] === j) {

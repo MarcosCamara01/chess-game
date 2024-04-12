@@ -14,15 +14,27 @@ export const reducer = (state: GameState, action: Action) => {
         }
 
         case ActionTypes.NEW_MOVE: {
-            let { position, movesList, turn } = state;
+            let { position, movesList, turn, allMovesList, allPositionList } = state;
             position = [
                 ...position,
                 action.payload.newPosition
             ];
+
             movesList = [
                 ...movesList,
                 action.payload.newMove
             ];
+
+            allPositionList = [
+                ...position,
+                action.payload.newPosition
+            ];
+
+            allMovesList = [
+                ...movesList,
+                action.payload.newMove
+            ];
+
             turn = turn === 'w' ? 'b' : 'w';
 
             return {
@@ -161,24 +173,27 @@ export const reducer = (state: GameState, action: Action) => {
 
         case ActionTypes.MOVE_FORWARD: {
             let { position, movesList, turn, allPositionList, allMovesList } = state;
-
-            const currentPositionIndex = position.length + 1;
-            const idexAfterThisMove = position.length;
-
-            if (allPositionList.length > 0) {
-                position = allPositionList.slice(0, currentPositionIndex);
-                movesList = allMovesList.slice(0, idexAfterThisMove);
-                turn = turn === 'w' ? 'w' : 'b';
+                    
+            if (position.length < allPositionList.length) {
+                const updatedAllPositionList = allPositionList.slice(0, -1);
+                
+                position = allPositionList.slice(0, position.length + 1);
+                movesList = allMovesList.slice(0, position.length);
+                
+                turn = turn === 'w' ? 'b' : 'w';
+        
+                return {
+                    ...state,
+                    position,
+                    movesList,
+                    turn,
+                    allPositionList: updatedAllPositionList, 
+                };
+            } else {
+                return state;
             }
-
-            return {
-                ...state,
-                position,
-                movesList,
-                turn,
-            };
         }
-
+        
         default:
             return state;
     }
