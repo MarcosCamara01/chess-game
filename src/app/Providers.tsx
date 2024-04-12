@@ -30,10 +30,9 @@ export default function Providers({ children }: Props) {
     const localChess = localStorage.getItem("localChess");
     if (localChess) {
       dispatch(initStored(JSON.parse(localChess)))
-      setIsInitialized(true);
-    } else {
-      setIsInitialized(true);
     }
+
+    setIsInitialized(true);
 
     // Clear the event when unmounting the component
     return () => {

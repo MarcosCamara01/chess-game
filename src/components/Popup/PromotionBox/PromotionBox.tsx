@@ -1,7 +1,7 @@
 import { useAppContext } from '@/Context'
 import { copyPosition, getNewMoveNotation, } from '@/helper';
 import { makeNewMove, clearCandidates } from '@/reducer/actions/move';
-import { PromotionBoxProps } from '@/types/types';
+import { ChessBoard, PromotionBoxProps } from '@/types/types';
 import Image from 'next/image';
 
 const PromotionBox = ({ onClosePopup }: PromotionBoxProps) => {
@@ -16,16 +16,16 @@ const PromotionBox = ({ onClosePopup }: PromotionBoxProps) => {
 
     const onClick = (option: string) => {
         onClosePopup()
-        const newPosition = copyPosition(appState.position[appState.position.length - 1])
+        const newPosition = copyPosition(appState.position[appState.position.length - 1] as ChessBoard)
 
         newPosition[promotionSquare.rank][promotionSquare.file] = ''
         newPosition[promotionSquare.x][promotionSquare.y] = color + option
-        console.log(appState)
+
         const newMove = getNewMoveNotation({
             ...appState,
             x: promotionSquare.rank,
             y: promotionSquare.file,
-            position: appState.position[appState.position.length - 1],
+            position: appState.position[appState.position.length - 1] as ChessBoard,
             promotesTo: option
         })
         dispatch(clearCandidates())

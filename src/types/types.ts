@@ -47,6 +47,16 @@ export interface PerformMove {
     y: number;
 }
 
+export interface GetNewMoveNotation {
+    position: ChessBoard;
+    piece?: string;
+    rank?: number;
+    file?: number;
+    x: number;
+    y: number;
+    promotesTo?: string;
+}
+
 export interface UpdateCastlingState {
     piece: string;
     file: number;
@@ -122,3 +132,8 @@ export interface MakeNewMove {
     newPosition: number[][];
     newMove: string;
 }
+
+export type ChessCoords = {
+    x: number;
+    y: number;
+};

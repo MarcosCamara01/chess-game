@@ -33,32 +33,28 @@ const Timers: React.FC = () => {
 
     return (
         <div className='h-board flex flex-col justify-between items-center' id='timers'>
-            {status === 'Ongoing' ? (
-                <>
-                    <div className='w-[150px] py-3 px-6 bg-foreground rounded flex justify-between items-center'>
-                        <Image
-                            src={bK}
-                            width={40}
-                            height={40}
-                            alt={status}
-                        />
-                        <p className='text-sm font-semibold'>
-                            {formatTime(blackTimer)}
-                        </p>
-                    </div>
-                    <div className='w-[150px] py-3 px-6 bg-foreground rounded flex justify-between items-center'>
-                        <Image
-                            src={wK}
-                            width={40}
-                            height={40}
-                            alt={status}
-                        />
-                        <p className='text-sm font-semibold'>
-                            {formatTime(whiteTimer)}
-                        </p>
-                    </div>
-                </>
-            ) : null}
+            <div className='w-[150px] py-3 px-6 bg-foreground rounded flex justify-between items-center'>
+                <Image
+                    src={bK}
+                    width={40}
+                    height={40}
+                    alt={status}
+                />
+                <p className='text-sm font-semibold'>
+                    {formatTime(blackTimer)}
+                </p>
+            </div>
+            <div className='w-[150px] py-3 px-6 bg-foreground rounded flex justify-between items-center'>
+                <Image
+                    src={wK}
+                    width={40}
+                    height={40}
+                    alt={status}
+                />
+                <p className='text-sm font-semibold'>
+                    {formatTime(whiteTimer)}
+                </p>
+            </div>
         </div>
     );
 };

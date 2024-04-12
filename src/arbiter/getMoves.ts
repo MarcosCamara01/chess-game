@@ -1,5 +1,6 @@
 import {
     ChessBoard,
+    EnemyPieces,
     GetCastlingDirections,
     GetCastlingMoves,
     GetKnightMoves,
@@ -299,8 +300,8 @@ export const getCastlingDirections = ({ castleDirection, piece, file, rank }: Ge
     }
 }
 
-export const getPieces = (position: ChessBoard, enemy: string): PieceInfo[] => {
-    const enemyPieces: PieceInfo[] = [];
+export const getPieces = (position: ChessBoard, enemy: string) => {
+    const enemyPieces: EnemyPieces = [];
     position.forEach((rank, x) => {
         rank.forEach((file, y) => {
             if (position[x][y].startsWith(enemy))
@@ -319,8 +320,9 @@ export const getKingPosition = (position: ChessBoard, player: string): [number, 
     let kingPos: [number, number] | undefined;
     position.forEach((rank, x) => {
         rank.forEach((file, y) => {
-            if (position[x][y].startsWith(player) && position[x][y].endsWith('k'))
+            if (position[x][y].startsWith(player) && position[x][y].endsWith('k')) {
                 kingPos = [x, y];
+            }
         });
     });
     return kingPos;

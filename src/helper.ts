@@ -1,3 +1,5 @@
+import { ChessBoard, ChessCoords, GetNewMoveNotation } from "./types/types";
+
 export const getCharacter = (file: any) => String.fromCharCode(file + 96)
 
 export const createPosition = (): string[][] => {
@@ -29,7 +31,7 @@ export const createPosition = (): string[][] => {
     return position;
 };
 
-export const copyPosition = (position: any) => {
+export const copyPosition = (position: ChessBoard) => {
     const newPosition =
         new Array(8).fill('').map(x => new Array(8).fill(''))
 
@@ -42,34 +44,31 @@ export const copyPosition = (position: any) => {
     return newPosition
 }
 
-export const areSameColorTiles = (coords1: any, coords2: any) =>
+export const areSameColorTiles = (coords1: ChessCoords, coords2: ChessCoords) => (
     (coords1.x + coords1.y) % 2 === (coords2.x + coords2.y)
+)
 
-
-export const findPieceCoords = (position: any, type: any) => {
-    let results: any = []
-    position.forEach((rank: any, i: any) => {
-        rank.forEach((pos: any, j: any) => {
-            if (pos === type)
-                results.push({ x: i, y: j })
+export const findPieceCoords = (position: ChessBoard, type: string): ChessCoords[] => {
+    let results: ChessCoords[] = []
+    position.forEach((rank: string[], i: number) => {
+        rank.forEach((pos: string, j: number) => {
+            if (pos === type) results.push({ x: i, y: j })
         })
     });
     return results
 }
 
-export const getNewMoveNotation = ({ piece, rank, file, x, y, position, promotesTo }: any) => {
+export const getNewMoveNotation = ({ piece, rank, file, x, y, position, promotesTo }: GetNewMoveNotation) => {
     let note = ''
 
     rank = Number(rank)
     file = Number(file)
-    if (!promotesTo && piece[1] === 'k' && Math.abs(file - y) === 2) {
-        if (file < y)
-            return 'O-O'
-        else
-            return 'O-O-O'
+    if (!promotesTo && piece && piece[1] === 'k' && Math.abs(file - y) === 2) {
+        if (file < y) return 'O-O'
+        else return 'O-O-O'
     }
 
-    if (!promotesTo && piece[1] !== 'p') {
+    if (!promotesTo && piece && piece[1] !== 'p') {
         note += piece[1].toUpperCase()
         if (position[x][y]) {
             note += 'x'
@@ -81,8 +80,7 @@ export const getNewMoveNotation = ({ piece, rank, file, x, y, position, promotes
 
     note += getCharacter(y + 1) + (x + 1)
 
-    if (promotesTo)
-        note += '=' + promotesTo.toUpperCase()
+    if (promotesTo) note += '=' + promotesTo.toUpperCase()
 
     return note
 }
