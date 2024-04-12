@@ -165,7 +165,7 @@ const arbiter = {
         return false
     },
 
-    isCheckMate: function (position: ChessBoard, player: string, castleDirection: ChessBoard) {
+    isCheckMate: function (position: ChessBoard, player: string, castleDirection: string) {
         const isInCheck = this.isPlayerInCheck({ positionAfterMove: position, player })
 
         if (!isInCheck)

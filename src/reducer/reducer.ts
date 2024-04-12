@@ -2,7 +2,7 @@
 
 import { Status } from "@/constants";
 import ActionTypes from "./actionTypes";
-import { Action, GameState } from "@/types/types";
+import { Action, ChessBoard, GameState } from "@/types/types";
 
 export const reducer = (state: GameState, action: Action) => {
     switch (action.type) {
@@ -142,7 +142,7 @@ export const reducer = (state: GameState, action: Action) => {
             const idexAfterThisMove = position.length - 2;
 
             if (currentPositionIndex > 0) {
-                allPositionList = allPositionList.concat(position);
+                allPositionList = allPositionList.concat(position as ChessBoard);
                 allMovesList = allMovesList.concat(movesList);
                 position = position.slice(0, currentPositionIndex);
                 movesList = movesList.slice(0, idexAfterThisMove);

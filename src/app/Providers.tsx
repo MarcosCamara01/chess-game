@@ -43,7 +43,6 @@ export default function Providers({ children }: Props) {
 
   useEffect(() => {
     // Store state in local storage
-    
     if (isInitialized) {
       localStorage.setItem("localChess", JSON.stringify(appState));
     }

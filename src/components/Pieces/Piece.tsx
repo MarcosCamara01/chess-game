@@ -2,7 +2,7 @@ import React from 'react';
 import arbiter from '@/arbiter/arbiter';
 import { useAppContext } from '@/Context';
 import { generateCandidates } from '@/reducer/actions/move';
-import { PieceInfo } from '@/types/types';
+import { ChessBoard, PieceInfo } from '@/types/types';
 import Image from 'next/image';
 
 const Piece = ({ rank, file, piece }: PieceInfo) => {
@@ -25,8 +25,8 @@ const Piece = ({ rank, file, piece }: PieceInfo) => {
         if (turn === piece[0]) {
             const candidateMoves =
                 arbiter.getValidMoves({
-                    position: currentPosition[currentPosition.length - 1],
-                    prevPosition: currentPosition[currentPosition.length - 2],
+                    position: currentPosition[currentPosition.length - 1] as ChessBoard,
+                    prevPosition: currentPosition[currentPosition.length - 2] as ChessBoard,
                     castleDirection: castleDirection[turn],
                     piece,
                     file,

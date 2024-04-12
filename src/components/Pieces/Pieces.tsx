@@ -18,7 +18,7 @@ import { ChessBoard, UpdateCastlingState, OpenPromotionBox, Moves } from '@/type
 const Pieces = () => {
 
     const { appState, dispatch } = useAppContext();
-    const currentPosition: ChessBoard = appState.position[appState.position.length - 1]
+    const currentPosition = appState.position[appState.position.length - 1] as ChessBoard
 
     const ref = useRef<HTMLDivElement>(null)
 

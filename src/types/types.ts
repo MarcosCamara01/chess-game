@@ -1,7 +1,7 @@
 export type ChessBoard = string[][];
 
 export interface GameState {
-    position: ChessBoard;
+    position: ChessBoard | ChessBoard[];
     turn: string;
     candidateMoves: [number, number][];
     movesList: Moves;
@@ -33,7 +33,7 @@ export interface GetValidMoves {
 }
 
 export interface IsPlayerInCheck {
-    positionAfterMove: ChessBoard;
+    positionAfterMove: ChessBoard | string[][];
     position?: ChessBoard;
     player: string;
 }
@@ -114,7 +114,7 @@ export type EnemyPieces = Piece[];
 
 export type Action = {
     type: string;
-    payload: any;
+    payload?: any;
 };
 
 export interface MakeNewMove {

@@ -10,6 +10,7 @@ import GameEnds from '../Popup/GameEnds/GameEnds'
 import arbiter from '../../arbiter/arbiter'
 import { getKingPosition } from '../../arbiter/getMoves'
 import { closePopup } from '@/reducer/actions/popup';
+import { ChessBoard } from '@/types/types'
 
 const Board = () => {
     const ranks = Array(8).fill('').map((_, i) => 8 - i);
@@ -17,7 +18,7 @@ const Board = () => {
 
     const { appState, dispatch } = useAppContext();
 
-    const position = appState.position[appState.position.length - 1]
+    const position = appState.position[appState.position.length - 1] as ChessBoard;
 
     const checkTile = (() => {
         const isInCheck = (arbiter.isPlayerInCheck({
