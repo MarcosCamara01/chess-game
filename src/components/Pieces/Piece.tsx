@@ -5,7 +5,7 @@ import { generateCandidates } from '@/reducer/actions/move';
 import { ChessBoard, PieceInfo } from '@/types/types';
 import Image from 'next/image';
 
-const Piece = ({ rank, file, piece }: PieceInfo) => {
+const Piece = ({ rank, file, piece, setOnClickEvent }: PieceInfo) => {
     const { appState, dispatch } = useAppContext();
     const { turn, castleDirection, position: currentPosition } = appState;
 
@@ -14,6 +14,7 @@ const Piece = ({ rank, file, piece }: PieceInfo) => {
 
     const onDragStart = (e: React.DragEvent<HTMLImageElement>) => {
         const target = e.currentTarget;
+
         if (target) {
             e.dataTransfer.effectAllowed = "move";
             e.dataTransfer.setData("text/plain", `${piece},${rank},${file}`);
@@ -22,6 +23,23 @@ const Piece = ({ rank, file, piece }: PieceInfo) => {
             }, 0);
         }
 
+        genValidMoves()
+    };
+
+    const onDragEnd = (e: React.DragEvent<HTMLImageElement>) => {
+        const target = e.currentTarget;
+        if (target) {
+            target.style.display = 'block';
+        }
+    };
+
+    const onClickPiece = () => {
+        setOnClickEvent({ piece, rank, file });
+        genValidMoves();
+    };
+
+
+    const genValidMoves = () => {
         if (turn === piece[0]) {
             const candidateMoves =
                 arbiter.getValidMoves({
@@ -34,14 +52,7 @@ const Piece = ({ rank, file, piece }: PieceInfo) => {
                 });
             dispatch(generateCandidates({ candidateMoves }));
         }
-    };
-
-    const onDragEnd = (e: React.DragEvent<HTMLImageElement>) => {
-        const target = e.currentTarget;
-        if (target) {
-            target.style.display = 'block';
-        }
-    };
+    }
 
     return (
         <div
@@ -54,6 +65,7 @@ const Piece = ({ rank, file, piece }: PieceInfo) => {
                 draggable={true}
                 onDragStart={onDragStart}
                 onDragEnd={onDragEnd}
+                onClick={onClickPiece}
                 alt={piece}
                 width={85}
                 height={85}

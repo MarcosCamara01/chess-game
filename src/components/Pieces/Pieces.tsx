@@ -1,5 +1,5 @@
 import Piece from './Piece'
-import { useRef } from 'react'
+import { useRef, useState } from 'react'
 import { useAppContext } from '@/Context'
 import { openPromotion } from '@/reducer/actions/popup'
 import { getCastlingDirections } from '@/arbiter/getMoves'
@@ -13,11 +13,11 @@ import {
 import { makeNewMove, clearCandidates } from '../../reducer/actions/move'
 import arbiter from '../../arbiter/arbiter'
 import { getNewMoveNotation } from '../../helper'
-import { ChessBoard, UpdateCastlingState, OpenPromotionBox, Moves } from '@/types/types'
+import { ChessBoard, UpdateCastlingState, OpenPromotionBox } from '@/types/types'
 
 const Pieces = () => {
-
     const { appState, dispatch } = useAppContext();
+    const [onCLickEvent, setOnClickEvent] = useState({ piece: "", rank: 0, file: 0 })
     const currentPosition = appState.position[appState.position.length - 1] as ChessBoard
 
     const ref = useRef<HTMLDivElement>(null)
@@ -53,13 +53,7 @@ const Pieces = () => {
         return { x, y }
     }
 
-    const move = (e: React.DragEvent<HTMLDivElement>) => {
-        const { x, y } = calculateCoords(e)
-        const [piece, rankStr, fileStr] = e.dataTransfer.getData("text").split(',')
-
-        const rank = parseInt(rankStr);
-        const file = parseInt(fileStr);
-
+    const move = (piece: string, rank: number, file: number, x: number, y: number) => {
         if (appState.candidateMoves.find((m: [number, number]) => m[0] === x && m[1] === y)) {
             const opponent = piece.startsWith('b') ? 'w' : 'b'
             const castleDirection = appState.castleDirection[`${piece.startsWith('b') ? 'white' : 'black'}`]
@@ -86,44 +80,68 @@ const Pieces = () => {
             })
             dispatch(makeNewMove({ newPosition, newMove }))
 
-            if (arbiter.insufficientMaterial(newPosition))
+            if (arbiter.insufficientMaterial(newPosition)) {
                 dispatch(detectInsufficientMaterial())
+            }
             else if (arbiter.isStalemate(newPosition, opponent, castleDirection)) {
                 dispatch(detectStalemate())
             }
             else if (arbiter.isCheckMate(newPosition, opponent, castleDirection)) {
                 dispatch(detectCheckmate(piece[0]))
             }
+
+            dispatch(clearCandidates())
+            setOnClickEvent({ piece: "", rank: 0, file: 0 })
         }
-        dispatch(clearCandidates())
     }
 
     const onDrop = (e: React.DragEvent<HTMLDivElement>) => {
         e.preventDefault()
+        const { x, y } = calculateCoords(e)
+        const [piece, rankStr, fileStr] = e.dataTransfer.getData("text").split(',')
+        const rank = parseInt(rankStr);
+        const file = parseInt(fileStr);
 
-        move(e)
+        move(piece, rank, file, x, y)
     }
+
+    const onCLick = (e: React.MouseEvent<HTMLImageElement, MouseEvent>) => {
+        e.preventDefault()
+
+        const { x, y } = calculateCoords(e)
+        const piece = onCLickEvent.piece
+        const rank = onCLickEvent.rank
+        const file = onCLickEvent.file
+
+        if ((rank !== x || file !== y) && appState.turn === piece[0]) {
+            move(piece, rank, file, x, y)
+        }
+    };
 
     const onDragOver = (e: React.DragEvent<HTMLDivElement>) => { e.preventDefault() }
 
-    return <div
-        className='absolute top-0 right-0 bottom-quarter w-board h-board'
-        ref={ref}
-        onDrop={onDrop}
-        onDragOver={onDragOver} >
-        {currentPosition.map((r: string[], rank: number) =>
-            r.map((f: string, file: number) =>
-                currentPosition[rank][file]
-                    ? <Piece
-                        key={rank + '-' + file}
-                        rank={rank}
-                        file={file}
-                        piece={currentPosition[rank][file]}
-                    />
-                    : null
-            )
-        )}
-    </div>
+    return (
+        <div
+            className='absolute top-0 right-0 bottom-quarter w-board h-board transition-all'
+            ref={ref}
+            onDrop={onDrop}
+            onClick={onCLick}
+            onDragOver={onDragOver}>
+            {currentPosition.map((r: string[], rank: number) =>
+                r.map((f: string, file: number) =>
+                    currentPosition[rank][file]
+                        ? <Piece
+                            key={rank + '-' + file}
+                            rank={rank}
+                            file={file}
+                            piece={currentPosition[rank][file]}
+                            setOnClickEvent={setOnClickEvent}
+                        />
+                        : null
+                )
+            )}
+        </div>
+    )
 }
 
 export default Pieces

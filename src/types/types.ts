@@ -102,6 +102,7 @@ export interface PieceInfo {
     piece: string;
     rank: number;
     file: number;
+    setOnClickEvent: (data: { piece: string; rank: number; file: number }) => void;
 }
 
 export interface Piece {
