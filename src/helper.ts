@@ -62,14 +62,14 @@ export const getNewMoveNotation = ({ piece, rank, file, x, y, position, promotes
 
     rank = Number(rank)
     file = Number(file)
-    if (piece[1] === 'k' && Math.abs(file - y) === 2) {
+    if (!promotesTo && piece[1] === 'k' && Math.abs(file - y) === 2) {
         if (file < y)
             return 'O-O'
         else
             return 'O-O-O'
     }
 
-    if (piece[1] !== 'p') {
+    if (!promotesTo && piece[1] !== 'p') {
         note += piece[1].toUpperCase()
         if (position[x][y]) {
             note += 'x'

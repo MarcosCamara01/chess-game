@@ -20,6 +20,7 @@ const PromotionBox = ({ onClosePopup }: PromotionBoxProps) => {
 
         newPosition[promotionSquare.rank][promotionSquare.file] = ''
         newPosition[promotionSquare.x][promotionSquare.y] = color + option
+        console.log(appState)
         const newMove = getNewMoveNotation({
             ...appState,
             x: promotionSquare.rank,
