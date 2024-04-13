@@ -1,10 +1,11 @@
 import { useAppContext } from '@/Context'
 import { copyPosition, getNewMoveNotation, } from '@/helper';
 import { makeNewMove, clearCandidates } from '@/reducer/actions/move';
-import { ChessBoard, PromotionBoxProps } from '@/types/types';
+import { closePopup } from '@/reducer/actions/popup';
+import { ChessBoard } from '@/types/types';
 import Image from 'next/image';
 
-const PromotionBox = ({ onClosePopup }: PromotionBoxProps) => {
+const PromotionBox = () => {
     const { appState, dispatch } = useAppContext();
     const { promotionSquare } = appState;
 
@@ -15,7 +16,7 @@ const PromotionBox = ({ onClosePopup }: PromotionBoxProps) => {
     const options = ['q', 'r', 'b', 'n']
 
     const onClick = (option: string) => {
-        onClosePopup()
+        dispatch(closePopup())
         const newPosition = copyPosition(appState.position[appState.position.length - 1] as ChessBoard)
 
         newPosition[promotionSquare.rank][promotionSquare.file] = ''
@@ -43,7 +44,7 @@ const PromotionBox = ({ onClosePopup }: PromotionBoxProps) => {
                     <Image
                         className='h-full w-full cursor-pointer transition-all hover:scale-105'
                         onClick={() => onClick(option)}
-                        src={`/pieces/${color}${option}.png`}
+                        src={`/pieces/${color}${option.toUpperCase()}.png`}
                         alt={color + option}
                         width={85}
                         height={85}

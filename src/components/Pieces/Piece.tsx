@@ -54,6 +54,8 @@ const Piece = ({ rank, file, piece, setOnClickEvent }: PieceInfo) => {
         }
     }
 
+    const pieceImageName = `${piece.charAt(0)}${piece.charAt(1).toUpperCase()}`;
+
     return (
         <div
             className='w-[12.5%] h-[12.5%] absolute cursor-grab'
@@ -61,7 +63,7 @@ const Piece = ({ rank, file, piece, setOnClickEvent }: PieceInfo) => {
         >
             <Image
                 className="w-full h-full relative"
-                src={`/pieces/${piece}.png`}
+                src={`/pieces/${pieceImageName}.png`}
                 draggable={true}
                 onDragStart={onDragStart}
                 onDragEnd={onDragEnd}

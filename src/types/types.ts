@@ -70,10 +70,6 @@ export interface OpenPromotionBox {
     y: number;
 }
 
-export interface PromotionBoxProps {
-    onClosePopup: () => void;
-}
-
 export interface GetKnightMoves {
     position: ChessBoard;
     rank: number;
